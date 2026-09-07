@@ -1,0 +1,25 @@
+成员 B 独立交付清单（不含主线密码代码）
+
+[文档]
+- README.md：使用入口和边界
+- docs/MQTT_审计与部署设计.md：主题表、字段表、时序、异常、审计、部署
+
+[代码]
+- member_b_mqtt/mqtt_transport.py：Envelope 与主题
+- member_b_mqtt/session_router.py：串行、重复、乱序处理
+- member_b_mqtt/audit.py：脱敏结构化审计
+- demo.py：不含密码实现的传输层演示
+
+[规范和示例]
+- schemas/*.json：Envelope 和审计 JSON Schema
+- examples/*.json：四类消息及审计非敏感示例
+
+[部署]
+- deployment/mosquitto/mosquitto.local.conf
+- deployment/mosquitto/acl.example
+- deployment/mosquitto/passwords.example.txt
+- deployment/启动说明.txt
+
+[测试]
+- tests/test_member_b.py
+- 运行：python -m unittest discover -s tests -v

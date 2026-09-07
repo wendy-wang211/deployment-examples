@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/pqc-iot/audit-event-v1.schema.json",
+  "title": "PQC IoT Audit Event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["audit_version", "event_id", "timestamp", "event_type", "severity", "component", "outcome", "reason_code"],
+  "properties": {
+    "audit_version": {"const": "audit-v1"},
+    "event_id": {"type": "string", "format": "uuid"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "event_type": {"enum": ["handshake_started", "handshake_succeeded", "handshake_failed", "session_closed", "record_accepted", "record_rejected", "transport_message_rejected", "transport_route_mismatch", "transport_duplicate", "transport_message_conflict", "broker_connected", "broker_disconnected", "configuration_loaded"]},
+    "severity": {"enum": ["info", "warning", "error", "critical"]},
+    "component": {"enum": ["device", "gateway", "mqtt_adapter", "broker"]},
+    "outcome": {"enum": ["success", "failure", "unknown"]},
+    "reason_code": {"type": "string", "pattern": "^[a-z0-9_.-]{1,64}$"},
+    "route_device_id": {"type": "string", "maxLength": 64},
+    "route_gateway_id": {"type": "string", "maxLength": 64},
+    "authenticated_peer_identity_id": {"type": "string", "maxLength": 64},
+    "local_identity_id": {"type": "string", "maxLength": 64},
+    "handshake_id": {"type": "string", "pattern": "^[0-9a-f]{32}$"},
+    "session_id": {"type": "string", "maxLength": 256},
+    "direction": {"enum": ["device_to_gateway", "gateway_to_device"]},
+    "record_sequence": {"type": "integer", "minimum": 0, "maximum": 16777215},
+    "message_id": {"type": "string", "format": "uuid"},
+    "remote_endpoint": {"type": "string", "maxLength": 256},
+    "details": {"type": "object", "additionalProperties": false, "maxProperties": 20}
+  }
+}

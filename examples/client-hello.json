@@ -1,0 +1,11 @@
+{
+  "envelope_version": "mqtt-envelope-v1",
+  "protocol_version": "auth-v1",
+  "message_type": "client_hello",
+  "message_id": "11111111-1111-4111-8111-111111111111",
+  "route_device_id": "device-demo-01",
+  "route_gateway_id": "gateway-demo",
+  "handshake_id": "0123456789abcdef0123456789abcdef",
+  "payload_content_type": "application/vnd.pqc-iot.auth-v1+binary",
+  "payload_b64u": "AAECAwQFBgcICQ"
+}

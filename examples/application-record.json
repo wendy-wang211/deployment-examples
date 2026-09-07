@@ -1,0 +1,13 @@
+{
+  "envelope_version": "mqtt-envelope-v1",
+  "protocol_version": "auth-v1",
+  "message_type": "application_record",
+  "message_id": "44444444-4444-4444-8444-444444444444",
+  "route_device_id": "device-demo-01",
+  "route_gateway_id": "gateway-demo",
+  "session_id": "session-id-from-security-codec",
+  "direction": "device_to_gateway",
+  "record_sequence": 0,
+  "payload_content_type": "application/vnd.pqc-iot.auth-v1+binary",
+  "payload_b64u": "AQIDBAUGBwgJCgsM"
+}

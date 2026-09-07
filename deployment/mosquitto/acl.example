@@ -1,0 +1,16 @@
+# Mosquitto ACL 示例；按实际 MQTT 用户名和路由 ID 生成最小权限
+# 设备 device-demo-01：只能发布自己的握手上行和记录上行，订阅自己的下行
+user device-demo-01
+topic write pqc-iot/v1/gateways/gateway-demo/handshakes/+/client-hello
+topic write pqc-iot/v1/gateways/gateway-demo/handshakes/+/client-flight
+topic write pqc-iot/v1/gateways/gateway-demo/sessions/+/records/up
+topic read pqc-iot/v1/devices/device-demo-01/handshakes/+/server-flight
+topic read pqc-iot/v1/devices/device-demo-01/sessions/+/records/down
+
+# 网关 gateway-demo：只能订阅设备上行，发布设备下行
+user gateway-demo
+topic read pqc-iot/v1/gateways/gateway-demo/handshakes/+/client-hello
+topic read pqc-iot/v1/gateways/gateway-demo/handshakes/+/client-flight
+topic read pqc-iot/v1/gateways/gateway-demo/sessions/+/records/up
+topic write pqc-iot/v1/devices/+/handshakes/+/server-flight
+topic write pqc-iot/v1/devices/+/sessions/+/records/down

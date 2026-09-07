@@ -1,0 +1,17 @@
+{
+  "audit_version": "audit-v1",
+  "event_id": "55555555-5555-4555-8555-555555555555",
+  "timestamp": "2026-09-07T10:00:00.123Z",
+  "event_type": "handshake_succeeded",
+  "severity": "info",
+  "component": "gateway",
+  "outcome": "success",
+  "reason_code": "client_finished_verified",
+  "route_device_id": "device-demo-01",
+  "route_gateway_id": "gateway-demo",
+  "authenticated_peer_identity_id": "device-identity-01",
+  "local_identity_id": "gateway-identity-01",
+  "handshake_id": "0123456789abcdef0123456789abcdef",
+  "session_id": "session-id-from-security-codec",
+  "details": {"protocol_version": "auth-v1", "message_count": 3}
+}

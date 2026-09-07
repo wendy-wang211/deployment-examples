@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/pqc-iot/mqtt-envelope-v1.schema.json",
+  "title": "PQC IoT MQTT Envelope v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["envelope_version", "protocol_version", "message_type", "message_id", "route_device_id", "route_gateway_id", "payload_content_type", "payload_b64u"],
+  "properties": {
+    "envelope_version": {"const": "mqtt-envelope-v1"},
+    "protocol_version": {"const": "auth-v1"},
+    "message_type": {"enum": ["client_hello", "server_flight", "client_flight", "application_record"]},
+    "message_id": {"type": "string", "format": "uuid"},
+    "route_device_id": {"type": "string", "pattern": "^[A-Za-z0-9_.-]{1,64}$"},
+    "route_gateway_id": {"type": "string", "pattern": "^[A-Za-z0-9_.-]{1,64}$"},
+    "handshake_id": {"type": "string", "pattern": "^[0-9a-f]{32}$"},
+    "session_id": {"type": "string", "minLength": 1, "maxLength": 256},
+    "direction": {"enum": ["device_to_gateway", "gateway_to_device"]},
+    "record_sequence": {"type": "integer", "minimum": 0, "maximum": 16777215},
+    "payload_content_type": {"const": "application/vnd.pqc-iot.auth-v1+binary"},
+    "payload_b64u": {"type": "string", "pattern": "^[A-Za-z0-9_-]+$", "maxLength": 1048576}
+  },
+  "allOf": [
+    {"if": {"properties": {"message_type": {"enum": ["client_hello", "server_flight", "client_flight"]}}}, "then": {"required": ["handshake_id"], "not": {"required": ["session_id", "direction", "record_sequence"]}}},
+    {"if": {"properties": {"message_type": {"const": "application_record"}}}, "then": {"required": ["session_id", "direction", "record_sequence"], "not": {"required": ["handshake_id"]}}}
+  ]
+}

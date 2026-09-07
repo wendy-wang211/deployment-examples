@@ -1,0 +1,14 @@
+成员 B 本地部署顺序
+
+1. 安装 Mosquitto，并确保 mosquitto、mosquitto_passwd 在 PATH。
+2. 进入 deployment/mosquitto。
+3. 运行：mosquitto_passwd -c .\passwd gateway-demo
+4. 运行：mosquitto_passwd .\passwd device-demo-01
+5. 启动：mosquitto -c .\mosquitto.local.conf -v
+6. 网关进程先连接并订阅网关主题。
+7. 设备进程后连接、创建 handshake_id 并发出 ClientHello。
+8. 三类握手消息全部 retain=false、QoS=1。
+9. 服务端确认最终握手消息后，才允许应用记录。
+10. 演示结束时关闭会话和 MQTT 连接。
+
+注意：本包不含密码实现和安全对象 wire codec。examples 中 payload 是非敏感占位字节。
